@@ -1,0 +1,17 @@
+[user]
+	name = Simon Lundgren
+	email = sim.lund@outlook.com
+
+[core]
+	whitepsace = error
+	preloadindex = true
+
+[status]
+	branch = true
+	showStash = true
+	showUntrackedFiles = all
+
+[url "git@github.com:"]
+	insteadOf = "gh:"
+[url "git@github.com:simlund94/"]
+	insteadOf = "sl"
