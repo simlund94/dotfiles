@@ -4,6 +4,14 @@
 	background: transparent;
 }
 
+tooltip {
+	color: #d8cab8;
+	background-image: linear-gradient(to bottom, rgba(20, 18, 22, 0.9) 90%);
+	border-radius: 14px;
+	padding: 0px;
+	border-style: none;
+}
+
 window#waybar {
 	background-image: linear-gradient(to bottom, rgba(20, 18, 22, 0.9) 100%);
 
@@ -77,5 +85,4 @@ window#waybar {
   color: #ac82e9;
   font-weight: bold;
 }
-
 
