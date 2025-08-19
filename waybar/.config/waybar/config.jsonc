@@ -36,7 +36,7 @@
     	},
 
     	"clock": {
-    		"format": " {:%H:%M} ",
+    		"format": " {:%H:%M} ",
 		"tooltip": false
     	},
 
