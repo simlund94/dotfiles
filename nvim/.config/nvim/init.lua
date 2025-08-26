@@ -5,15 +5,12 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 vim.opt.conceallevel = 1
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
--- NOTE: You can change these options as you wish!
---  For more options, you can see `:help option-list`
-
 -- Make line numbers default
 vim.o.number = true
 vim.o.relativenumber = true
@@ -261,6 +258,54 @@ require('lazy').setup({
 
       -- see below for full list of options 👇
     },
+  },
+  {
+    'nvimdev/dashboard-nvim',
+    event = 'VimEnter',
+    config = function()
+      require('dashboard').setup {
+        theme = 'hyper',
+        config = {
+          header = {
+            '███╗   ██╗██╗   ██╗██╗███╗   ███╗',
+            '████╗  ██║██║   ██║██║████╗ ████║',
+            '██╔██╗ ██║██║   ██║██║██╔████╔██║',
+            '██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║',
+            '██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║',
+            '╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝',
+            '',
+          },
+          footer = {
+            '',
+            'The risk I took was calculated, but boy am I bad at math',
+          },
+          shortcut = {
+            { desc = '󰊳 Update', group = '@property', action = 'Lazy update', key = 'u' },
+            {
+              icon = ' ',
+              icon_hl = '@variable',
+              desc = 'Files',
+              group = 'Label',
+              action = 'Telescope find_files',
+              key = 'f',
+            },
+            {
+              desc = ' Apps',
+              group = 'DiagnosticHint',
+              action = 'Telescope app',
+              key = 'a',
+            },
+            {
+              desc = ' dotfiles',
+              group = 'Number',
+              action = 'Telescope dotfiles',
+              key = 'd',
+            },
+          },
+        },
+      }
+    end,
+    dependencies = { { 'nvim-tree/nvim-web-devicons' } },
   },
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
@@ -660,9 +705,7 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
-        --
-
+        ts_ls = {},
         texlab = {
           filetypes = { 'tex', 'bib', 'plaintex' },
           settings = {
@@ -724,6 +767,8 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'ts_ls',
+        'texlab',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
