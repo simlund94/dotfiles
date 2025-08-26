@@ -38,3 +38,5 @@ export PATH=$JAVA_HOME/bin:$PATH
 
 export EDITOR='/usr/bin/nvim'
 export VISUAL='/usr/bin/nvim'
+
+fastfetch

@@ -1,4 +1,4 @@
--- Set <space> as the leader key
+-- <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
@@ -6,6 +6,8 @@ vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = false
+
+vim.opt.conceallevel = 1
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -15,6 +17,9 @@ vim.g.have_nerd_font = false
 -- Make line numbers default
 vim.o.number = true
 vim.o.relativenumber = true
+
+vim.opt.textwidth = 80
+vim.opt.formatoptions:append 't'
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
@@ -84,6 +89,10 @@ vim.o.confirm = true
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+-- Change forward search to '_'
+vim.keymap.set('n', '_', '/', { noremap = true })
+vim.keymap.set('v', '_', '/', { noremap = true })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
@@ -196,6 +205,10 @@ require('lazy').setup({
     },
   },
   {
+    'nvim-tree/nvim-web-devicons',
+    opts = {},
+  },
+  {
     'lervag/vimtex',
     lazy = false, -- we don't want to lazy load VimTeX
     ft = { 'tex' },
@@ -210,6 +223,46 @@ require('lazy').setup({
       }
     end,
   },
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {},
+  },
+  {
+    'epwalsh/obsidian.nvim',
+    version = '*', -- recommended, use latest release instead of latest commit
+    lazy = true,
+    ft = 'markdown',
+    -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+    -- event = {
+    --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+    --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
+    --   -- refer to `:h file-pattern` for more examples
+    --   "BufReadPre path/to/my-vault/*.md",
+    --   "BufNewFile path/to/my-vault/*.md",
+    -- },
+    dependencies = {
+      -- Required.
+      'nvim-lua/plenary.nvim',
+
+      -- see below for full list of optional dependencies 👇
+    },
+    opts = {
+      workspaces = {
+        {
+          name = 'obsidian-vault',
+          path = '~/Documents/Skolarbeten/0-obsidian-vault',
+        },
+      },
+
+      -- see below for full list of options 👇
+    },
+  },
+
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
   -- This is often very useful to both group configuration, as well as handle
@@ -364,17 +417,17 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
       -- Slightly advanced example of overriding default behavior and theme
-      vim.keymap.set('n', '<leader>/', function()
+      vim.keymap.set('n', '<leader>_', function()
         -- You can pass additional configuration to Telescope to change the theme, layout, etc.
         builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
           winblend = 10,
           previewer = false,
         })
-      end, { desc = '[/] Fuzzily search in current buffer' })
+      end, { desc = '[_] Fuzzily search in current buffer' })
 
       -- It's also possible to pass additional configuration options.
       --  See `:help telescope.builtin.live_grep()` for information about particular keys
-      vim.keymap.set('n', '<leader>s/', function()
+      vim.keymap.set('n', '<leader>s_', function()
         builtin.live_grep {
           grep_open_files = true,
           prompt_title = 'Live Grep in Open Files',
@@ -850,7 +903,7 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+      vim.cmd.colorscheme 'miniautumn'
     end,
   },
 
@@ -933,7 +986,7 @@ require('lazy').setup({
   -- require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
