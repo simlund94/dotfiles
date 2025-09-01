@@ -5,6 +5,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+eval "$(fzf --bash)"
 
 # Aliases
 alias upd='paru -Syu --noconfirm'
@@ -27,6 +28,14 @@ alias la='ls -a'
 alias ll='ls -laFh'
 alias l.="ls -A | grep -E '^\.'"
 alias grep='grep --color=auto'
+
+# rclone sync skolarbeten
+alias syncup='rclone sync ~/Documents/Skolarbeten gdrive-skolarbeten: --update \
+--delete-during --create-empty-src-dirs --fast-list --transfers=16 \
+--checkers=32 --stats=10s --progress'
+alias syncdown='rclone sync gdrive-skolarbeten: ~/Documents/Skolarbeten --update \
+--delete-during --create-empty-src-dirs --fast-list --transfers=16 \
+--checkers=32 --stats=10s --progress'
 
 # Bash prompt
 PS1='[\u@\h \W]\$ '
