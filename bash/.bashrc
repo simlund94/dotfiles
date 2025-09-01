@@ -35,6 +35,7 @@ export XDG_SESSION_TYPE=wayland
 export XDG_CURRENT_DESKTOP=Hyprland
 export JAVA_HOME=/usr/lib/jvm/java-24-openjdk
 export PATH=$JAVA_HOME/bin:$PATH
+export TERMINAL=/usr/bin/kitty
 
 export EDITOR='/usr/bin/nvim'
 export VISUAL='/usr/bin/nvim'

@@ -15,3 +15,5 @@
 	insteadOf = "gh:"
 [url "git@github.com:simlund94/"]
 	insteadOf = "sl"
+[pull]
+	rebase = false
