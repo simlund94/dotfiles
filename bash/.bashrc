@@ -29,6 +29,9 @@ alias ll='ls -laFh'
 alias l.="ls -A | grep -E '^\.'"
 alias grep='grep --color=auto'
 
+# fzf
+alias cf='cd $(find . -type d | fzf)'
+
 # rclone sync skolarbeten
 alias syncup='rclone sync ~/Documents/Skolarbeten gdrive-skolarbeten: --update \
 --delete-during --create-empty-src-dirs --fast-list --transfers=16 \
