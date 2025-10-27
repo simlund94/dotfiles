@@ -3,8 +3,9 @@
 	email = sim.lund@outlook.com
 
 [core]
-	whitepsace = error
+	whitespace = error
 	preloadindex = true
+	autocrlf = input
 
 [status]
 	branch = true
