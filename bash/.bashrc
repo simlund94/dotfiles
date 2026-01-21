@@ -35,17 +35,17 @@ alias cf='cd $(find . -type d | fzf)'
 # rclone sync skolarbeten
 alias syncup='rclone sync ~/Documents/Skolarbeten gdrive-skolarbeten: --update \
 --delete-during --create-empty-src-dirs --fast-list --transfers=16 \
---checkers=32 --stats=10s --progress'
+--checkers=32 --stats=1s --progress'
 alias syncdown='rclone sync gdrive-skolarbeten: ~/Documents/Skolarbeten --update \
 --delete-during --create-empty-src-dirs --fast-list --transfers=16 \
---checkers=32 --stats=10s --progress'
+--checkers=32 --stats=1s --progress'
 
 # Bash prompt
 PS1='[\u@\h \W]\$ '
 
 export XDG_SESSION_TYPE=wayland
 export XDG_CURRENT_DESKTOP=Hyprland
-export JAVA_HOME=/usr/lib/jvm/java-24-openjdk
+export JAVA_HOME=/usr/lib/jvm/java-21-openjdk
 export PATH=$JAVA_HOME/bin:$PATH
 export TERMINAL=/usr/bin/kitty
 
@@ -53,3 +53,19 @@ export EDITOR='/usr/bin/nvim'
 export VISUAL='/usr/bin/nvim'
 
 fastfetch
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/usr/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/usr/etc/profile.d/conda.sh" ]; then
+        . "/usr/etc/profile.d/conda.sh"
+    else
+        export PATH="/usr/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
