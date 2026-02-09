@@ -18,7 +18,7 @@ alias gs='git status --short'
 alias ga='git add'
 alias gc='git commit'
 alias gp='git push'
-alias gu='git pull'
+# alias gu='git pull'
 alias gl='git log'
 alias gb='git branch'
 
@@ -40,19 +40,31 @@ alias syncdown='rclone sync gdrive-skolarbeten: ~/Documents/Skolarbeten --update
 --delete-during --create-empty-src-dirs --fast-list --transfers=16 \
 --checkers=32 --stats=1s --progress'
 
+mvnrun() {
+  local main_class=${1:-se.simlund.App}
+  mvn -q compile exec:java -Dexec.mainClass="$main_class"
+}
+
 # Bash prompt
 PS1='[\u@\h \W]\$ '
 
 export XDG_SESSION_TYPE=wayland
 export XDG_CURRENT_DESKTOP=Hyprland
-export JAVA_HOME=/usr/lib/jvm/java-21-openjdk
-export PATH=$JAVA_HOME/bin:$PATH
+#export JAVA_HOME=/usr/lib/jvm/java-21-openjdk
+#export PATH=$JAVA_HOME/bin:$PATH
 export TERMINAL=/usr/bin/kitty
+export GRAALVM_HOME="$HOME/.sdkman/candidates/java/25.0.1-graal"
+export PATH="$GRAALVM_HOME/bin:$PATH"
 
 export EDITOR='/usr/bin/nvim'
 export VISUAL='/usr/bin/nvim'
 
 fastfetch
+
+# Pyenv init
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - bash)"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -69,3 +81,7 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
